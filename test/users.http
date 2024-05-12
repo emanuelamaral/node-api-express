@@ -1,0 +1,19 @@
+@url=http://localhost:3000/users
+
+### CRIAR
+POST {{url}}
+Content-Type: application/json
+
+{
+    "name": "Juca",
+    "email": "j@gmail.com",
+    "password": "1234",
+    "birth": "2000-01-01"
+}
+
+
+### GET ALL
+GET {{url}}
+
+### Get by ID
+GET {{url}}/6335ee8ce8a9c74c2085aca1
