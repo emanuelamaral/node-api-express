@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const EventSchema = new mongoose.Schema({
-    // person: {type: Int, required: true},
+    person: {type: Number, required: true},
     type: {type: String, required: true},
-    // associatedDevice: {type: Int16Array, required: true},
+    associatedDevice: {type: Number, required: true},
     timestamp: {type: Date, required: true},
     additionalDetails: {type: String, required: false}
 });

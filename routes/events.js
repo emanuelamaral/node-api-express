@@ -3,11 +3,11 @@ const router = express.Router();
 const Event = require('../model/Event');
 const isAuthorized = require('../middleware/isAuthorized');
 
-router.get("/", async function(req, res) {
+router.get("/", [isAuthorized], async function(req, res) {
     return res.json(await Event.find());
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", [isAuthorized], async (req, res) => {
     const {id} = req.params;
 
     const result = await Event.findById(id);

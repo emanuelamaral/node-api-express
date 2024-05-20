@@ -8,7 +8,7 @@ const isAuthorized = require('../middleware/isAuthorized');
 // ROTAS
 
 /* GET users listing. */
-router.get("/", [isAuthorized], async function(req, res) {
+router.get("/", isAuthorized, async function(req, res) {
   return  res.json(await User.find());
 });
 
@@ -17,6 +17,7 @@ router.get("/:id", isAuthorized, async (req, res) => {
   const {id} = req.params;
 
   const result = await User.findById(id);
+
   return result 
     ? res.json(result)
     : res.status(404).send();
@@ -36,12 +37,29 @@ router.post("/", async (req, res) => {
 });
 
 
-router.put("/:id", isAuthorized, (req,res)=>{
+router.put("/:id", isAuthorized, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updates = req.body;
 
+    const result = await User.findByIdAndUpdate(id, updates, { new: true });
+
+    return result 
+      ? res.json(result)
+      : res.status(404).send('User not found');
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send('Internal Server Error');
+  }
 });
 
-router.delete("/:id", isAuthorized, (req,res)=>{
+router.delete("/:id", isAuthorized, async (req,res)=>{
+  const {id} = req.params;
 
+  const result = await User.findByIdAndDelete(id)
+  return result 
+    ? res.json(result)
+    : res.status(404).send();
 });
 
 

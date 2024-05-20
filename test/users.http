@@ -6,14 +6,28 @@ Content-Type: application/json
 
 {
     "name": "Juca",
-    "email": "j@gmail.com",
+    "email": "juca@gmail.com",
     "password": "1234",
     "birth": "2000-01-01"
 }
 
 
+
 ### GET ALL
 GET {{url}}
 
+
 ### Get by ID
-GET {{url}}/6335ee8ce8a9c74c2085aca1
+GET {{url}}/664bd8875380180edfb8c0e9
+
+
+### PUT 
+PUT {{url}}/662b902e5495ba0f117013c0
+{
+    "name": "Ronaldo Fenomeno"
+}
+
+
+### Delete BY ID
+DELETE {{url}}/664bcf5e707d6396f1ccfbd4
+

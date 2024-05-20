@@ -5,10 +5,11 @@ POST {{url}}
 Content-Type: application/json
 
 {
+    "person": 1,
     "type": "security",
+    "associatedDevice": 1,
     "timestamp": "2024-05-12",
-    "additionalDetails": "teste teste",
-    "birth": "2000-01-01"
+    "additionalDetails": "teste teste"
 }
 
 
@@ -16,4 +17,4 @@ Content-Type: application/json
 GET {{url}}
 
 ### Get by ID
-GET {{url}}/66411fb810fdde55b2c7ed04
+GET {{url}}/664bcf0d707d6396f1ccfbce
