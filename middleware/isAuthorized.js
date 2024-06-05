@@ -4,18 +4,25 @@ const isAuthorized = (req, res, next) => {
     // Obter o token
     const { authorization } = req.headers;
 
-    if(!authorization) 
-        return res.status(403).json({message: "Sem token"});
+    if (!authorization) {
+        return res.status(403).json({ message: "Sem token" });
+    }
+
+    // O token é geralmente enviado no formato "Bearer <token>"
+    const token = authorization.split(' ')[1];
+
+    if (!token) {
+        return res.status(403).json({ message: "Formato de token inválido" });
+    }
 
     // Validar o token
-    jwt.verify(authorization, process.env.JWT_SECRET, (err, decoded) => {
-        console.log(decoded);
-        
-        //Se ocorrer um erro na decodificação do token
-        if(err) return res.status(401).json({ message: "Token inválido"});
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ message: "Token inválido" });
+        }
 
-        req.userId = decoded.id; // Insere os dados do token na requisição
-        return next(); // Chama o próximo nó de execução da requisição
+        req.userId = decoded.id; 
+        return next();
     });
 };
 
